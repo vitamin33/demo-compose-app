@@ -13,6 +13,7 @@ import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
@@ -42,27 +43,39 @@ fun CreateBizCard() {
         .fillMaxHeight()) {
         Card(
             modifier = Modifier
-                .width(200.dp)
+                .fillMaxWidth()
                 .height(390.dp)
                 .padding(12.dp),
             shape = RoundedCornerShape(10.dp),
             colors = CardDefaults.cardColors(containerColor = Color.White),
             elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
         ) {
-            Surface(modifier = Modifier
-                .size(150.dp)
-                .padding(5.dp),
-                shape = CircleShape,
-                border = BorderStroke(0.5.dp, Color.LightGray),
-                color = MaterialTheme.colorScheme.primary
+            Column(
+                modifier = Modifier.height(300.dp).fillMaxWidth(),
+                verticalArrangement = Arrangement.Top,
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Image(
-                    painter = painterResource(id = R.drawable.profile),
-                    contentDescription = "Profile image",
-                    modifier = Modifier.size(135.dp)
-                )
+                CreateProfileImage()
             }
         }
+    }
+}
+
+@Composable
+private fun CreateProfileImage() {
+    Surface(
+        modifier = Modifier
+            .size(150.dp)
+            .padding(5.dp),
+        shape = CircleShape,
+        border = BorderStroke(0.5.dp, Color.LightGray),
+        color = MaterialTheme.colorScheme.primary
+    ) {
+        Image(
+            painter = painterResource(id = R.drawable.profile),
+            contentDescription = "Profile image",
+            modifier = Modifier.size(135.dp)
+        )
     }
 }
 
