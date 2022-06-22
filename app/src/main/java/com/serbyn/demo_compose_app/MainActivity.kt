@@ -3,6 +3,7 @@
 package com.serbyn.demo_compose_app
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.BorderStroke
@@ -27,7 +28,10 @@ class MainActivity : ComponentActivity() {
         setContent {
             DemocomposeappTheme {
                 // A surface container using the 'background' color from the theme
-                Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background
+                ) {
                     CreateBizCard()
                 }
             }
@@ -38,9 +42,11 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun CreateBizCard() {
-    Surface(modifier = Modifier
-        .fillMaxWidth()
-        .fillMaxHeight()) {
+    Surface(
+        modifier = Modifier
+            .fillMaxWidth()
+            .fillMaxHeight()
+    ) {
         Card(
             modifier = Modifier
                 .fillMaxWidth()
@@ -51,13 +57,49 @@ fun CreateBizCard() {
             elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
         ) {
             Column(
-                modifier = Modifier.height(300.dp).fillMaxWidth(),
+                modifier = Modifier
+                    .height(300.dp)
+                    .fillMaxWidth(),
                 verticalArrangement = Arrangement.Top,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 CreateProfileImage()
+                Divider(color = Color.LightGray, thickness = 0.2.dp)
+                CreateInfo()
+                Button(onClick = {
+                    Log.d("MainActivity", "button clicked")
+                }) {
+                    Text(text = "Portfolio",
+                    style = MaterialTheme.typography.labelLarge)
+                }
             }
         }
+    }
+}
+
+@Composable
+private fun CreateInfo() {
+    Column(
+        modifier = Modifier
+            .padding(5.dp)
+            .fillMaxWidth(),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(
+            text = "Vitalii Serbyn",
+            style = MaterialTheme.typography.headlineLarge,
+            color = MaterialTheme.colorScheme.primary
+        )
+        Text(
+            text = "Android programmer",
+            modifier = Modifier.padding(3.dp),
+            style = MaterialTheme.typography.bodyMedium
+        )
+        Text(
+            text = "ser.vitalii@gmail.com",
+            modifier = Modifier.padding(3.dp),
+            style = MaterialTheme.typography.bodyMedium
+        )
     }
 }
 
