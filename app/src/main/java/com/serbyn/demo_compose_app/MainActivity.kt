@@ -1,15 +1,23 @@
+@file:OptIn(ExperimentalMaterial3Api::class)
+
 package com.serbyn.demo_compose_app
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.CornerSize
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.serbyn.demo_compose_app.ui.theme.DemocomposeappTheme
 
 class MainActivity : ComponentActivity() {
@@ -19,22 +27,49 @@ class MainActivity : ComponentActivity() {
             DemocomposeappTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
-                    Greeting("Android")
+                    CreateBizCard()
                 }
             }
         }
     }
 }
 
+
 @Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
+fun CreateBizCard() {
+    Surface(modifier = Modifier
+        .fillMaxWidth()
+        .fillMaxHeight()) {
+        Card(
+            modifier = Modifier
+                .width(200.dp)
+                .height(390.dp)
+                .padding(12.dp),
+            shape = RoundedCornerShape(10.dp),
+            colors = CardDefaults.cardColors(containerColor = Color.White),
+            elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
+        ) {
+            Surface(modifier = Modifier
+                .size(150.dp)
+                .padding(5.dp),
+                shape = CircleShape,
+                border = BorderStroke(0.5.dp, Color.LightGray),
+                color = MaterialTheme.colorScheme.primary
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.profile),
+                    contentDescription = "Profile image",
+                    modifier = Modifier.size(135.dp)
+                )
+            }
+        }
+    }
 }
 
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
     DemocomposeappTheme {
-        Greeting("Android")
+        CreateBizCard()
     }
 }
